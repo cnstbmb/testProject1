@@ -1,0 +1,33 @@
+<div>
+    <h1>Редактирование информации о пользователе</h1>
+
+    <p>{{ message}}</p>
+    <form role="form" name="myForm">
+        <div class= "form-group" ng-class="{error: myForm.name.$invalid}">
+            <label> ФИО </label>
+            <div>
+                <input name="name" ng-model="employee.name" class= "form-control" placeholder= "Фамилия Имя Отчество" required/>
+                <span ng-show="myForm.name.$dirty && myForm.name.$invalid" class="help-inline">Фамилия Имя Отчество обязательно</span>
+            </div>
+        </div>
+        <div class= "form-group" ng-class="{error: myForm.country.$invalid}">
+            <label> Страна </label>
+            <div>
+                <input name="country" ng-model="employee.country" type= "text" class= "form-control" placeholder="Страна" required/>
+                <span ng-show="myForm.country.$dirty && myForm.country.$invalid" class="help-inline">Страна обязательна</span>
+            </div>
+        </div>
+        <div class= "form-group" ng-class="{error: myForm.phone.$invalid}">
+            <label> Телефон </label>
+            <div>
+                <input name="phone" ng-model="employee.phone" type= "text" class= "form-control" placeholder="Телефон" required/>
+                <span ng-show="myForm.phone.$dirty && myForm.phone.$invalid" class="help-inline">Телефон обязателен</span>
+            </div>
+        </div>
+
+        <a href="#/employee/index" class="btn btn-default">Отмена</a>
+        <button ng-click="updateEmployee(employee);"
+                ng-disabled="isClean() || myForm.$invalid"
+                type="submit" class="btn btn-default">Сохарнить</button>
+    </form>
+</div>

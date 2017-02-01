@@ -1,0 +1,51 @@
+<div>
+    <h1>Список пользователей</h1>
+    <p>{{ message}}</p>
+    <div ng-show="employees.length > 0">
+        <div class="row">
+            <div class="form-group col-xs-5">
+                <input ng-model="filter.name" type="text" class="form-control" title="Поиск по ФИО" placeholder="Поиск по ФИО"/>
+            </div>
+            <div class="form-group col-xs-5">
+                <select class="form-control" title="Страна" name="show-filter" ng-model="filterCountry"
+                        ng-options="country for country in countryUniqList">
+                    <option label="" value="">--- Все страны ---</option>
+                </select>
+            </div>
+            <div>
+                <a class="btn btn-default" href="#/employee/create">
+                    <i class="glyphicon glyphicon-plus"></i> Добавить
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <!--<table>-->
+            <table class="table table-striped table-hover">
+                <thead>
+                <th><a href="" ng-click="orderByField='name'; reverseSort = !reverseSort">ФИО</a></th>
+                <th>Страна</th>
+                <th>Телефон</th>
+                <th style="width:80px;">Действия&nbsp;</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="data in employees | orderBy:orderByField:reverseSort | filter:{name: filter.name} | filter: (filterCountry || undefined) && {country: filterCountry}">
+                    <td>{{data.name}}</td>
+                    <td>{{data.country}}</td>
+                    <td>{{data.phone}}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="#/employee/update/{{data.id}}">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </a>
+                        <a class="btn btn-danger btn-xs" ng-click="deleteEmployee(data.id)">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div ng-show="employees.length == 0">
+        Список пользователей пуст
+    </div>
+</div>
